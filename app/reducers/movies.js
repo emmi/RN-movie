@@ -24,7 +24,6 @@ export default function popularMovies(state = initialState, action) {
         isRefreshing: true
       });
     case GET_POPULAR_MOVIES_SUCCESS:
-      console.log('movies ' + JSON.stringify(action.payload));
       return state.merge({
         isLoading: false,
         isError: false,

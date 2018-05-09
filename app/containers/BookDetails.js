@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { StyleSheet, Text, View, Image, StatusBar, Button } from "react-native";
 
 class LogoTitle extends React.Component {
@@ -25,9 +26,30 @@ export default class BookDetails extends React.Component {
     }
   };
 
+  getStars(votes) {
+    let stars = [];
+
+    console.log('votes ' + votes);
+
+    for (let i = 0; i < 5; i++) {
+      let starType = "star";
+      if (votes < 0.5) {
+        starType = "star-o";
+      } else if (votes >= 0.5 && votes < 1) {
+        starType = "star-half-o";
+      }
+
+      stars.push(<Icon key={i} style={styles.star} name={starType} color="#eeca66" size={25} />);
+      votes = votes - 1;
+    }
+
+    return stars;
+  }
+
 
   render() {
     const { params } = this.props.navigation.state;
+    const stars = this.getStars(params.data.get("vote_average") / 2);
 
     return (
       <View style={styles.container}>
@@ -40,9 +62,12 @@ export default class BookDetails extends React.Component {
           <View style={styles.titleInfo}>
             <Text style={styles.title}>{params.data.get("title")}</Text>
             <Text style={styles.year}>{moment(params.data.get("date")).format("YYYY") + ' - ' + params.data.get('runtime') + ' minutes'}</Text>
-          </View>
+            <View style={styles.stars}>
+              {stars}
+            </View>
+        </View>
           <View style={styles.button}>
-            <Button title="Button" color="white" />
+            <Button title="Button" color="white" onPress={() => console.log('moi')} />
           </View>
         </View>
 
@@ -56,15 +81,20 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
   },
   button: {
-    // borderWidth: 1,
-    bottom: -15,
-    // flex: 1,
-    width: "35%",
-    fontSize: 3,
-    borderRadius: 4,
-    backgroundColor: "#67ACAA",
+    bottom: 0,
+    width: "100%",
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+    backgroundColor: "#67AAAA",
     alignSelf: 'center',
     position: 'absolute',
+  },
+  stars: {
+    flexDirection: 'row',
+    paddingTop: 15,
+  },
+  star: {
+    marginRight: 3,
   },
   upperContainer: {
     height: 190,
@@ -86,7 +116,6 @@ const styles = StyleSheet.create({
     height: 155
   },
   titleInfo: {
-    // borderWidth: 1,
     width: "60%",
     marginTop: 10,
     alignSelf: 'flex-end'

@@ -13,13 +13,7 @@ import HomeScreen from "./app/containers/HomeScreen";
 class Root extends React.Component {
   static navigationOptions = {
     title: 'Home',
-    headerStyle: {
-      backgroundColor: '#67ACFD',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+    header: 'null'
   };
 
   render() {

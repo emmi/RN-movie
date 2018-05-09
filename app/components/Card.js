@@ -11,13 +11,21 @@ class Card extends React.Component {
 
     for (let i = 0; i < 5; i++) {
       let starType = "star";
+
       if (votes < 0.5) {
         starType = "star-o";
       } else if (votes >= 0.5 && votes < 1) {
         starType = "star-half-o";
       }
 
-      stars.push(<Icon key={i} style={styles.star} name={starType} size={12} />);
+      stars.push(
+        <Icon
+          key={i}
+          style={styles.star}
+          name={starType}
+          color="#eeca66"
+          size={12} />
+      );
       votes = votes - 1;
     }
 
@@ -25,11 +33,11 @@ class Card extends React.Component {
   }
 
   render() {
-    const stars = this.getStars(this.props.data.get("vote") / 2);
+    const stars = this.getStars(this.props.data.get("vote_average") / 2);
     const moviePreLink = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/";
 
     return (
-      <TouchableOpacity style={styles.container}
+      <TouchableOpacity style={[styles.container, this.props.backgroundColor]}
         onPress={() => this.props.navigation.navigate("BookDetails", {
               image: moviePreLink + this.props.data.get("poster_path"),
               data: this.props.data,
@@ -48,7 +56,7 @@ class Card extends React.Component {
               {stars}
             </View>
           </View>
-          <Text style={styles.author}>{moment(this.props.data.get("date")).format("YYYY")}</Text>
+          <Text style={styles.year}>{moment(this.props.data.get("date")).format("YYYY")}</Text>
           <Text numberOfLines={3} style={styles.description}>{this.props.data.get("overview")}</Text>
         </View>
       </TouchableOpacity>
@@ -58,10 +66,10 @@ class Card extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 10,
+    // borderRadius: 10,
     borderColor: "#d4dedf",
-    marginLeft: 10,
-    marginRight: 10,
+    // marginLeft: 10,
+    // marginRight: 10,
     shadowOpacity: 0.1,
     shadowOffset: {
       height: 7,
@@ -70,7 +78,7 @@ const styles = StyleSheet.create({
     height: 150,
     shadowRadius: 10,
     backgroundColor: "white",
-    marginBottom: 7,
+    // marginBottom: 7,
     flexDirection: "row",
   },
   imageContainer: {
@@ -86,10 +94,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 15,
+    fontSize: 16,
     marginRight: 5,
-    fontWeight: "bold",
-    color: "#4B7207",
+    fontFamily: "Avenir-Medium",
+    color: "#4d4e4f",
   },
   review: {
     flexDirection: "row",
@@ -97,18 +105,21 @@ const styles = StyleSheet.create({
   star: {
     marginRight: 1,
   },
-  author: {
+  year: {
     fontSize: 10,
     color: "#242424",
+    fontFamily: "Avenir",
     marginBottom: 10,
   },
   description: {
-    fontSize: 13,
-    width: 210,
+    fontSize: 11,
+    width: 240,
+    textAlign: 'justify',
     color: "#242424",
+    fontFamily: "Avenir",
   },
   date: {
-    fontSize: 12,
+    fontSize: 18,
     textAlign: "right",
     marginRight: 10,
   },

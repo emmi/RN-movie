@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { StyleSheet, View, StatusBar, ScrollView } from "react-native";
 import Card from "../components/Card";
+import MySearchBar from "../components/MySearchBar";
 import { fetchPopularMovies } from '../actions/movies';
 
 
@@ -14,14 +15,19 @@ class HomeScreen extends React.Component {
   render() {
     const { movies } = this.props;
 
-    const cards = movies.map((movie) => {
-      console.log('movie ' + JSON.stringify(movie));
-      return <Card key={movie.get('title')} navigation={this.props.navigation} data={movie} store={this.props.store} />;
+    const cards = movies.map((movie, id) => {
+      console.log('id ' + id);
+      let backgroundColor = "#fff";
+      if (id % 2 == 0) {
+        backgroundColor = "#F7F7F7"
+      }
+      return <Card key={movie.get('title')} navigation={this.props.navigation} backgroundColor={{backgroundColor: backgroundColor}} data={movie} store={this.props.store} />;
     })
 
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
+        <MySearchBar />
         <ScrollView style={styles.feed}>
           {cards}
         </ScrollView>
@@ -33,14 +39,13 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
     backgroundColor: "#DDE2EA",
     alignItems: "center",
     justifyContent: "center",
   },
   feed: {
     width: "100%",
-    height: "100%",
+    height: "70%",
     paddingTop: 10,
   },
 });
