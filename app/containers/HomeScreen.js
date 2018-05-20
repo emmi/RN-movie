@@ -1,9 +1,10 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { StyleSheet, View, StatusBar, ScrollView } from "react-native";
+import { connect } from "react-redux";
+import { StyleSheet, View, StatusBar, ScrollView, ActivityIndicator } from "react-native";
 import Card from "../components/Card";
 import MySearchBar from "../components/MySearchBar";
-import { fetchPopularMovies } from '../actions/movies';
+import BottomBar from "../components/BottomBar";
+import { fetchPopularMovies } from "../actions/movies";
 
 
 class HomeScreen extends React.Component {
@@ -13,24 +14,27 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const { movies } = this.props;
+    const { searchedMovies, isLoading } = this.props;
 
-    const cards = movies.map((movie, id) => {
-      console.log('id ' + id);
+    const cards = searchedMovies.map((movie, id) => {
       let backgroundColor = "#fff";
       if (id % 2 == 0) {
         backgroundColor = "#F7F7F7"
       }
-      return <Card key={movie.get('title')} navigation={this.props.navigation} backgroundColor={{backgroundColor: backgroundColor}} data={movie} store={this.props.store} />;
+      return <Card key={movie.get("id") + id + movie.get("poster_path")} navigation={this.props.navigation} backgroundColor={{backgroundColor: backgroundColor}} data={movie} store={this.props.store} />;
     })
 
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
-        <MySearchBar />
+        <MySearchBar store={this.props.store} />
         <ScrollView style={styles.feed}>
-          {cards}
+          <ActivityIndicator animating={isLoading} size="large" color="#2B919A" style={styles.spinner} />
+          <View style={styles.cards}>
+            {cards}
+          </View>
         </ScrollView>
+        <BottomBar />
       </View>
     );
   }
@@ -45,14 +49,22 @@ const styles = StyleSheet.create({
   },
   feed: {
     width: "100%",
-    height: "70%",
-    paddingTop: 10,
+    height: "100%",
+  },
+  cards: {
+    position: 'absolute',
+    width: "100%",
+  },
+  spinner: {
+    zIndex: 2,
+    marginTop: "50%",
   },
 });
 
 const select = store => {
   return {
-    movies: store.movie.get('popularMovies')
+    searchedMovies: store.movie.get("searchedMovies"),
+    isLoading: store.movie.get("isLoading")
   };
 };
 

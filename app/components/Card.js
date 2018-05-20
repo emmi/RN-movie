@@ -52,11 +52,13 @@ class Card extends React.Component {
         <View style={styles.infoContainer}>
           <View style={styles.titleBar}>
             <Text style={styles.title}>{this.props.data.get("title")}</Text>
+            <Text style={styles.year}> {moment(this.props.data.get("date")).format("YYYY")}</Text>
+          </View>
+          <View style={styles.reviewBar}>
             <View style={styles.review}>
               {stars}
             </View>
           </View>
-          <Text style={styles.year}>{moment(this.props.data.get("date")).format("YYYY")}</Text>
           <Text numberOfLines={3} style={styles.description}>{this.props.data.get("overview")}</Text>
         </View>
       </TouchableOpacity>
@@ -66,31 +68,42 @@ class Card extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    // borderRadius: 10,
-    borderColor: "#d4dedf",
-    // marginLeft: 10,
-    // marginRight: 10,
-    shadowOpacity: 0.1,
-    shadowOffset: {
-      height: 7,
-    },
+    // // borderColor: "#d4dedf",
+    // borderTopWidth: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 7,
+
+    // shadowOpacity: 0.1,
+    borderRadius: 4,
+    // shadowOffset: {
+    //   height: 7,
+    // },
     overflow: 'hidden',
     height: 150,
-    shadowRadius: 10,
+    // shadowRadius: 10,
     backgroundColor: "white",
-    // marginBottom: 7,
     flexDirection: "row",
   },
   imageContainer: {
     flex: 1,
   },
   infoContainer: {
+    // borderColor: "#2B919A",
+    // borderTopWidth: 5,
     paddingLeft: 10,
     flex: 2.5,
   },
   titleBar: {
     flexDirection: "row",
     marginTop: 10,
+    alignItems: "center",
+  },
+  reviewBar: {
+    // borderWidth: 1,
+    marginBottom: 10,
+    // alignItems: 'center',
+    flexDirection: "row",
     alignItems: "center",
   },
   title: {
@@ -106,14 +119,25 @@ const styles = StyleSheet.create({
     marginRight: 1,
   },
   year: {
-    fontSize: 10,
+    fontSize: 11,
+    // marginBottom: 0,
+    // textAlign: 'center',
+    // justifyContent: 'center',
+    // borderWidth: 1,
+    // borderWidth: 1,
+    // height: "100%",
+    // textAlign: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    marginRight: 10,
+    marginTop: 3,
     color: "#242424",
     fontFamily: "Avenir",
-    marginBottom: 10,
+    // marginBottom: 10,
   },
   description: {
     fontSize: 11,
-    width: 240,
+    width: 230,
     textAlign: 'justify',
     color: "#242424",
     fontFamily: "Avenir",
@@ -124,7 +148,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   image: {
-    flex: 1,
+    width: "100%",
+    height: 150,
+    // marginLeft: 10,
+    // marginTop: 10,
+    // borderRadius: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+
   },
 });
 
