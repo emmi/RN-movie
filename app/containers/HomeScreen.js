@@ -51,13 +51,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  cards: {
-    position: 'absolute',
-    width: "100%",
-  },
   spinner: {
     zIndex: 2,
+    position: "absolute",
     marginTop: "50%",
+    marginHorizontal: "50%",
   },
 });
 
