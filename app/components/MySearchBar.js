@@ -10,7 +10,7 @@ class MySearchBar extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {timer: null};
+    this.state = { timer: null };
   }
 
   search(query) {
@@ -27,11 +27,11 @@ class MySearchBar extends React.Component {
       <View style={styles.container}>
         <SearchBar
           lightTheme
-          containerStyle={{backgroundColor:'#DDE2EA'}}
+          containerStyle={ { backgroundColor:'#DDE2EA' } }
           placeholderTextColor='#4d4e4f'
-          inputStyle={{backgroundColor:'#fff'}}
-          onChangeText={(query) => this.search(query)}
-          onClear={() => console.log("moi")}
+          inputStyle={ { backgroundColor:'#fff', textAlign: 'center' } }
+          onChangeText={ (query) => this.search(query) }
+          onClear={ () => console.log("moi") }
           placeholder="Search..." />
       </View>
     );

@@ -3,21 +3,6 @@ import moment from "moment";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StyleSheet, Text, View, Image, StatusBar, Button } from "react-native";
 
-class LogoTitle extends React.Component {
-  render() {
-    console.log('aERaer ' + JSON.stringify(this.props.image));
-    return (
-      <View>
-        <Image
-          source={"../../assets/book_default.jpg"}
-          style={styles.headerImage}
-          />
-      </View>
-    );
-  }
-}
-
-
 export default class BookDetails extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -39,7 +24,7 @@ export default class BookDetails extends React.Component {
         starType = "star-half-o";
       }
 
-      stars.push(<Icon key={i} style={styles.star} name={starType} color="#eeca66" size={25} />);
+      stars.push(<Icon key={ i } style={ styles.star } name={ starType } color="#eeca66" size={ 25 } />);
       votes = votes - 1;
     }
 
@@ -52,22 +37,22 @@ export default class BookDetails extends React.Component {
     const stars = this.getStars(params.data.get("vote_average") / 2);
 
     return (
-      <View style={styles.container}>
-        <StatusBar  hidden={true} />
-        <View style={styles.upperContainer}>
+      <View style={ styles.container }>
+        <StatusBar  hidden={ true } />
+        <View style={ styles.upperContainer }>
           <Image
-            source={{uri: params.image}}
-            style={styles.image}
+            source={ { uri: params.image } }
+            style={ styles.image }
             />
-          <View style={styles.titleInfo}>
-            <Text style={styles.title}>{params.data.get("title")}</Text>
-            <Text style={styles.year}>{moment(params.data.get("date")).format("YYYY") + ' - ' + params.data.get('runtime') + ' minutes'}</Text>
-            <View style={styles.stars}>
+          <View style={ styles.titleInfo }>
+            <Text style={ styles.title }>{ params.data.get("title") }</Text>
+            <Text style={ styles.year }>{ moment(params.data.get("date")).format("YYYY") + ' - ' + params.data.get('runtime') + ' minutes' }</Text>
+            <View style={ styles.stars }>
               {stars}
             </View>
         </View>
-          <View style={styles.button}>
-            <Button title="Button" color="white" onPress={() => console.log('moi')} />
+          <View style={ styles.button }>
+            <Button title="Button" color="white" onPress={ () => console.log('moi') } />
           </View>
         </View>
 

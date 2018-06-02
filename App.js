@@ -22,7 +22,6 @@ class Root extends React.Component {
     };
 
     const loggerMiddleware = createLogger()
-
     const reducer = combineReducers(reducers);
     const store = createStore(
       reducer,
