@@ -1,9 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import moment from "moment";
+import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StyleSheet, Text, View, Image, StatusBar, Button } from "react-native";
+import { addMovie } from "../actions/savedMovies";
 
-export default class BookDetails extends React.Component {
+class BookDetails extends Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -31,10 +37,19 @@ export default class BookDetails extends React.Component {
     return stars;
   }
 
+  addToSaved(movie) {
+    // console.log('Movie info: ' + JSON.stringify(movie));
+    console.log('this props ' + JSON.stringify(this.props));
+
+    this.props.dispatch(addMovie(movie));
+  }
+
 
   render() {
     const { params } = this.props.navigation.state;
     const stars = this.getStars(params.data.get("vote_average") / 2);
+
+    console.log('is loading ' + this.props.isLoading);
 
     return (
       <View style={ styles.container }>
@@ -52,7 +67,7 @@ export default class BookDetails extends React.Component {
             </View>
         </View>
           <View style={ styles.button }>
-            <Button title="Button" color="white" onPress={ () => console.log('moi') } />
+            <Button title="Button" color="white" onPress={ () => this.addToSaved(params.data) } />
           </View>
         </View>
 
@@ -114,3 +129,5 @@ const styles = StyleSheet.create({
     fontSize: 11
   }
 });
+
+export default connect()(BookDetails);

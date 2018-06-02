@@ -17,7 +17,7 @@ class MySearchBar extends React.Component {
     clearTimeout(this.timer);
 
     this.timer = setTimeout(() => {
-      this.props.store.dispatch(searchMovies(query));
+      this.props.dispatch(searchMovies(query));
     }, 500);
 
   }
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default MySearchBar;
+export default connect()(MySearchBar);

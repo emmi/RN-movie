@@ -7,6 +7,7 @@ import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import TestReducer from './app/reducers/movies';
+import SavedMoviesReducer from './app/reducers/savedMovies';
 import BookDetails from "./app/containers/BookDetails";
 import HomeScreen from "./app/containers/HomeScreen";
 
@@ -19,6 +20,7 @@ class Root extends React.Component {
   render() {
     const reducers = {
       movie: TestReducer,
+      savedMovies: SavedMoviesReducer,
     };
 
     const loggerMiddleware = createLogger()
@@ -33,7 +35,7 @@ class Root extends React.Component {
 
     return (
       <Provider store={store}>
-        <HomeScreen navigation={this.props.navigation} store={store}/>
+        <RootStack />
       </Provider>
     );
   }
@@ -42,7 +44,7 @@ class Root extends React.Component {
 const RootStack = StackNavigator(
   {
     HomeScreen: {
-      screen: Root,
+      screen: HomeScreen,
     },
     BookDetails: {
       screen: BookDetails,
@@ -53,4 +55,4 @@ const RootStack = StackNavigator(
   }
 )
 
-export default RootStack;
+export default Root;
