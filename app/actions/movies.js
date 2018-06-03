@@ -1,4 +1,5 @@
 "use strict";
+import { API_URL, API_KEY } from "../config/config";
 
 //
 // Action Types
@@ -46,11 +47,11 @@ function searchMovies(query) {
       dispatch({ type: GET_MOVIES_SUCCESS, payload: []});
     }
     else {
-      return fetch("https://api.themoviedb.org/3/search/movie?api_key=bccab329a352ae667d89051331ee8a7c&query=" + query)
+      return fetch(API_URL + "search/movie?api_key=" + API_KEY + "&query=" + query)
       .then(response => response.json())
       .then(movies => {
         const promises = movies.results.map(movie => {
-          return fetch("https://api.themoviedb.org/3/movie/" + movie.id + "?api_key=bccab329a352ae667d89051331ee8a7c")
+          return fetch(API_URL + "movie/" + movie.id + "?api_key=" + API_KEY)
           .then(response => response.json())
           .then(responseJSON => {
             if(responseJSON !== null) {
