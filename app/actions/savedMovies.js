@@ -13,8 +13,6 @@ const ADD_MOVIE_FAILURE = "ADD_MOVIE_FAILURE";
 
 // Add movie to saved movies
 function addMovie(movie) {
-  console.log("Taas täällä " + JSON.stringify(movie));
-
   return dispatch => {
     dispatch({ type: ADD_MOVIE_REQUEST });
 

@@ -12,10 +12,6 @@ import BookDetails from "./app/containers/BookDetails";
 import HomeScreen from "./app/containers/HomeScreen";
 
 class Root extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-    header: 'null'
-  };
 
   render() {
     const reducers = {

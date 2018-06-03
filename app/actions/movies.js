@@ -4,7 +4,6 @@ import { API_URL, API_KEY } from "../config/config";
 //
 // Action Types
 //
-
 const GET_MOVIES_REQUEST = "GET_MOVIES_REQUEST";
 const GET_MOVIES_SUCCESS = "GET_MOVIES_SUCCESS";
 const GET_MOVIES_FAILURE = "GET_MOVIES_FAILURE";

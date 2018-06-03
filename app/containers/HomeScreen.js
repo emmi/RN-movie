@@ -7,12 +7,13 @@ import BottomBar from "../components/BottomBar";
 import { fetchPopularMovies } from "../actions/movies";
 import { BASIC_WHITE } from "../config/styles";
 
-
 class HomeScreen extends React.Component {
 
-  componentWillMount() {
-    // this.props.store.dispatch(fetchPopularMovies());
-  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: null
+    }
+  };
 
   getCards(movies) {
     const cards = movies.filter((movie) => movie.get("status") === "Released").map((movie, id) => {

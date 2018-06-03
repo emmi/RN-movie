@@ -1,0 +1,45 @@
+npm WARN deprecated bcrypt@1.0.3: bcrypt < v2.0.0 is susceptible to bcrypt wrap-around bug. Upgrade to bcrypt >= v2.0.0 for improved support for newer bcrypt hashes
+npm WARN deprecated uws@8.14.1: stop using this version
+/Users/esii/.nvm/versions/node/v8.11.2/bin/ros -> /Users/esii/.nvm/versions/node/v8.11.2/lib/node_modules/realm-object-server/dist/cli.js
+
+> bcrypt@1.0.3 install /Users/esii/.nvm/versions/node/v8.11.2/lib/node_modules/realm-object-server/node_modules/bcrypt
+> node-pre-gyp install --fallback-to-build
+
+[bcrypt] Success: "/Users/esii/.nvm/versions/node/v8.11.2/lib/node_modules/realm-object-server/node_modules/bcrypt/lib/binding/bcrypt_lib.node" is installed via remote
+
+> diskusage@0.2.4 install /Users/esii/.nvm/versions/node/v8.11.2/lib/node_modules/realm-object-server/node_modules/diskusage
+> node-gyp rebuild
+
+  CXX(target) Release/obj.target/diskusage/src/main.o
+clang: warning: using sysroot for 'iPhoneSimulator' but targeting 'MacOSX' [-Wincompatible-sysroot]
+  CXX(target) Release/obj.target/diskusage/src/diskusage_posix.o
+clang: warning: using sysroot for 'iPhoneSimulator' but targeting 'MacOSX' [-Wincompatible-sysroot]
+  SOLINK_MODULE(target) Release/diskusage.node
+clang: warning: using sysroot for 'iPhoneSimulator' but targeting 'MacOSX' [-Wincompatible-sysroot]
+ld: building for OSX, but linking against dylib built for iOS (/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.4.sdk/usr/lib/libc++.tbd). file '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.4.sdk/usr/lib/libc++.tbd' for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [Release/diskusage.node] Error 1
+gyp ERR! build error 
+gyp ERR! stack Error: `make` failed with exit code: 2
+gyp ERR! stack     at ChildProcess.onExit (/Users/esii/.nvm/versions/node/v8.11.2/lib/node_modules/npm/node_modules/node-gyp/lib/build.js:258:23)
+gyp ERR! stack     at emitTwo (events.js:126:13)
+gyp ERR! stack     at ChildProcess.emit (events.js:214:7)
+gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:198:12)
+gyp ERR! System Darwin 17.5.0
+gyp ERR! command "/Users/esii/.nvm/versions/node/v8.11.2/bin/node" "/Users/esii/.nvm/versions/node/v8.11.2/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "rebuild"
+gyp ERR! cwd /Users/esii/.nvm/versions/node/v8.11.2/lib/node_modules/realm-object-server/node_modules/diskusage
+gyp ERR! node -v v8.11.2
+gyp ERR! node-gyp -v v3.6.2
+gyp ERR! not ok 
+npm WARN realm-object-server@3.6.3 had bundled packages that do not match the required version(s). They have been replaced with non-bundled versions.
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! diskusage@0.2.4 install: `node-gyp rebuild`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the diskusage@0.2.4 install script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/esii/.npm/_logs/2018-06-03T17_17_38_101Z-debug.log
