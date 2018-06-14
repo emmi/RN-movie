@@ -38,18 +38,26 @@ class BookDetails extends Component {
   }
 
   addToSaved(movie) {
-    // console.log('Movie info: ' + JSON.stringify(movie));
-    console.log('this props ' + JSON.stringify(this.props));
+    // TODO: move somewhere else
+    const movieInfo = {
+      id: movie.get('id'),
+      title: movie.get('title'),
+      year: moment(movie.get("date")).format("YYYY"),
+      runtime: movie.get('runtime'),
+      genres: movie.get('genres'),
+      status: movie.get('status'),
+      overview: movie.get('overview'),
+      posterPath: movie.get('poster_path'),
+      votes: movie.get('vote_average'),
+    }
 
-    this.props.dispatch(addMovie(movie));
+    this.props.dispatch(addMovie(movieInfo));
   }
 
 
   render() {
     const { params } = this.props.navigation.state;
     const stars = this.getStars(params.data.get("vote_average") / 2);
-
-    console.log('is loading ' + this.props.isLoading);
 
     return (
       <View style={ styles.container }>

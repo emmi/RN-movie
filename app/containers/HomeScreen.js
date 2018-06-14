@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, StatusBar, ScrollView, ActivityIndicator } from
 import Card from "../components/Card";
 import MySearchBar from "../components/MySearchBar";
 import BottomBar from "../components/BottomBar";
-import { fetchPopularMovies } from "../actions/movies";
 import { BASIC_WHITE } from "../config/styles";
 
 class HomeScreen extends React.Component {

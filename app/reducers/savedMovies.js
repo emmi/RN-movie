@@ -28,7 +28,6 @@ export default function popularMovies(state = initialState, action) {
         isRefreshing: true
       };
     case ADD_MOVIE_SUCCESS:
-      console.log('action payload ' + JSON.stringify(action.payload));
       return {
         ...state,
         isLoading: false,

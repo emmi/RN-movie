@@ -1,11 +1,9 @@
 "use strict";
+import { API_URL } from "../config/config";
 
 //
 // Action Types
 //
-// const GET_SAVED_MOVIES_REQUEST = "GET_SAVED_MOVIES_REQUEST";
-// const GET_SAVED_MOVIES_SUCCESS = "GET_SAVED_MOVIES_SUCCESS";
-// const GET_SAVED_MOVIES_FAILURE = "GET_SAVED_MOVIES_FAILURE";
 
 const ADD_MOVIE_REQUEST = "ADD_MOVIE_REQUEST";
 const ADD_MOVIE_SUCCESS = "ADD_MOVIE_SUCCESS";
@@ -16,15 +14,23 @@ function addMovie(movie) {
   return dispatch => {
     dispatch({ type: ADD_MOVIE_REQUEST });
 
-    let isInvalid = false;
-    const movieInformation = { title: movie.get("title"), year: movie.get("release_date") }
-
-    if (isInvalid) {
+    fetch(API_URL + '/movie/save', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(movie)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('msg: ' + JSON.stringify(data));
+      dispatch({ type: ADD_MOVIE_SUCCESS, payload: movie });
+    })
+    .catch(error => {
+      console.log('error');
       dispatch({ type: ADD_MOVIE_FAILURE });
-    } else {
-      dispatch({ type: ADD_MOVIE_SUCCESS, payload: movieInformation });
-    }
-
+    });
   }
 }
 
