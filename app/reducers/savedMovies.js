@@ -3,19 +3,24 @@
 import { fromJS } from 'immutable';
 
 import {
-  // GET_SAVED_MOVIES_REQUEST,
-  // GET_SAVED_MOVIES_SUCCESS,
-  // GET_SAVED_MOVIES_FAILURE,
   ADD_MOVIE_REQUEST,
   ADD_MOVIE_SUCCESS,
   ADD_MOVIE_FAILURE,
 } from '../actions/savedMovies';
 
+import {
+  GET_SAVED_MOVIES_REQUEST,
+  GET_SAVED_MOVIES_SUCCESS,
+  GET_SAVED_MOVIES_FAILURE,
+} from '../actions/app';
+
 const initialState = {
   isLoading: false,
   isError: false,
   isRefreshing: false,
-  savedMovies: [],
+  savedMovies: {
+    movies: []
+  },
 };
 
 export default function popularMovies(state = initialState, action) {
@@ -33,9 +38,33 @@ export default function popularMovies(state = initialState, action) {
         isLoading: false,
         isError: false,
         isRefreshing: false,
-        savedMovies: [...state.savedMovies, action.payload]
+        savedMovies: {
+          movies: [...state.savedMovies.movies, action.payload]
+        }
       };
     case ADD_MOVIE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        isRefreshing: false
+      };
+    case GET_SAVED_MOVIES_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        isRefreshing: true
+      };
+    case GET_SAVED_MOVIES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        isRefreshing: false,
+        savedMovies: action.payload,
+      };
+    case GET_SAVED_MOVIES_FAILURE:
       return {
         ...state,
         isLoading: false,

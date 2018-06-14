@@ -5,6 +5,8 @@ import Card from "../components/Card";
 import MySearchBar from "../components/MySearchBar";
 import BottomBar from "../components/BottomBar";
 import { BASIC_WHITE } from "../config/styles";
+import { getAndSetData } from "../actions/app";
+
 
 class HomeScreen extends React.Component {
 
@@ -13,6 +15,14 @@ class HomeScreen extends React.Component {
       header: null
     }
   };
+
+  componentDidMount() {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.props.dispatch(getAndSetData());
+  }
 
   getCards(movies) {
     const cards = movies.filter((movie) => movie.get("status") === "Released").map((movie, id) => {

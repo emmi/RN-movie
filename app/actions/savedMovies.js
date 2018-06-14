@@ -9,12 +9,16 @@ const ADD_MOVIE_REQUEST = "ADD_MOVIE_REQUEST";
 const ADD_MOVIE_SUCCESS = "ADD_MOVIE_SUCCESS";
 const ADD_MOVIE_FAILURE = "ADD_MOVIE_FAILURE";
 
+const GET_SAVED_MOVIES_REQUEST = "GET_SAVED_MOVIES_REQUEST";
+const GET_SAVED_MOVIES_SUCCESS = "GET_SAVED_MOVIES_SUCCESS";
+const GET_SAVED_MOVIES_FAILURE = "GET_SAVED_MOVIES_FAILURE";
+
 // Add movie to saved movies
 function addMovie(movie) {
   return dispatch => {
     dispatch({ type: ADD_MOVIE_REQUEST });
 
-    fetch(API_URL + '/movie/save', {
+    fetch(API_URL + '/movies/save', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -34,15 +38,19 @@ function addMovie(movie) {
   }
 }
 
+function getSavedMovies() {
+
+}
+
 
 export {
-  // GET_SAVED_MOVIES_REQUEST,
-  // GET_SAVED_MOVIES_SUCCESS,
-  // GET_SAVED_MOVIES_FAILURE,
-  // searchMovies,
-
   ADD_MOVIE_REQUEST,
   ADD_MOVIE_SUCCESS,
   ADD_MOVIE_FAILURE,
   addMovie,
+
+  GET_SAVED_MOVIES_REQUEST,
+  GET_SAVED_MOVIES_SUCCESS,
+  GET_SAVED_MOVIES_FAILURE,
+  getSavedMovies,
 };
