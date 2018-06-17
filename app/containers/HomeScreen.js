@@ -25,12 +25,16 @@ class HomeScreen extends React.Component {
   }
 
   getCards(movies) {
-    const cards = movies.filter((movie) => movie.get("status") === "Released").map((movie, id) => {
+
+    if (movies === undefined || movies.length === 0) {
+      return [];
+    }
+    const cards = movies.filter((movie) => movie.status === "Released").map((movie, id) => {
       let backgroundColor = BASIC_WHITE;
       if (id % 2 == 0) {
         backgroundColor = "#F7F7F7"
       }
-      return <Card key={ movie.get("id") + id + movie.get("poster_path") } navigation={ this.props.navigation } backgroundColor={ { backgroundColor: backgroundColor } } data={ movie } store={ this.props.store } />;
+      return <Card key={ movie.id + id + movie.poster_path } navigation={ this.props.navigation } backgroundColor={ { backgroundColor: backgroundColor } } data={ movie } store={ this.props.store } />;
     });
 
     return cards;
@@ -53,7 +57,7 @@ class HomeScreen extends React.Component {
             {cards}
           </View>
         </ScrollView>
-        <BottomBar />
+        <BottomBar navigation={ this.props.navigation } store={ this.props.store } />
       </View>
     );
   }
@@ -94,8 +98,8 @@ const styles = StyleSheet.create({
 
 const select = store => {
   return {
-    searchedMovies: store.movie.get("searchedMovies"),
-    isLoading: store.movie.get("isLoading")
+    searchedMovies: store.movie.searchedMovies,
+    isLoading: store.movie.isLoading,
   };
 };
 

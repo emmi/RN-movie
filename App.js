@@ -9,6 +9,7 @@ import { StackNavigator } from 'react-navigation';
 import TestReducer from './app/reducers/movies';
 import SavedMoviesReducer from './app/reducers/savedMovies';
 import BookDetails from "./app/containers/BookDetails";
+import SavedMovies from "./app/containers/SavedMovies";
 import HomeScreen from "./app/containers/HomeScreen";
 
 class Root extends React.Component {
@@ -45,6 +46,9 @@ const RootStack = StackNavigator(
     BookDetails: {
       screen: BookDetails,
     },
+    SavedMovies: {
+      screen: SavedMovies
+    }
   },
   {
     initialRouteName: 'HomeScreen',

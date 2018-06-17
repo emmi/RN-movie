@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import moment from "moment";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StyleSheet, Text, View, Image, StatusBar, Button } from "react-native";
@@ -20,8 +19,6 @@ class BookDetails extends Component {
   getStars(votes) {
     let stars = [];
 
-    console.log('votes ' + votes);
-
     for (let i = 0; i < 5; i++) {
       let starType = "star";
       if (votes < 0.5) {
@@ -40,15 +37,15 @@ class BookDetails extends Component {
   addToSaved(movie) {
     // TODO: move somewhere else
     const movieInfo = {
-      id: movie.get('id'),
-      title: movie.get('title'),
-      year: moment(movie.get("date")).format("YYYY"),
-      runtime: movie.get('runtime'),
-      genres: movie.get('genres'),
-      status: movie.get('status'),
-      overview: movie.get('overview'),
-      posterPath: movie.get('poster_path'),
-      votes: movie.get('vote_average'),
+      id: movie.id,
+      title: movie.title,
+      release_year: movie.release_year,
+      runtime: movie.runtime,
+      genres: movie.genres,
+      status: movie.status,
+      overview: movie.overview,
+      poster_path: movie.poster_path,
+      vote_average: movie.vote_average,
     }
 
     this.props.dispatch(addMovie(movieInfo));
@@ -57,7 +54,7 @@ class BookDetails extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    const stars = this.getStars(params.data.get("vote_average") / 2);
+    const stars = this.getStars(params.data.vote_average / 2);
 
     return (
       <View style={ styles.container }>
@@ -68,8 +65,8 @@ class BookDetails extends Component {
             style={ styles.image }
             />
           <View style={ styles.titleInfo }>
-            <Text style={ styles.title }>{ params.data.get("title") }</Text>
-            <Text style={ styles.year }>{ moment(params.data.get("date")).format("YYYY") + ' - ' + params.data.get('runtime') + ' minutes' }</Text>
+            <Text style={ styles.title }>{ params.data.title }</Text>
+            <Text style={ styles.year }>{ params.data.release_year + ' - ' + params.data.runtime + ' minutes' }</Text>
             <View style={ styles.stars }>
               {stars}
             </View>

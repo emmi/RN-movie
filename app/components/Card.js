@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
@@ -33,33 +32,33 @@ class Card extends React.Component {
   }
 
   render() {
-    const stars = this.getStars(this.props.data.get("vote_average") / 2);
+    const stars = this.getStars(this.props.data.vote_average / 2);
     const moviePreLink = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/";
 
     return (
       <TouchableOpacity style={ [styles.container, this.props.backgroundColor] }
         onPress={ () => this.props.navigation.navigate("BookDetails", {
-              image: moviePreLink + this.props.data.get("poster_path"),
+              image: moviePreLink + this.props.data.poster_path,
               data: this.props.data,
               navigation: this.props.navigation
             }) }>
         <View style={ styles.imageContainer }>
           <Image
             style={ styles.image }
-            source={ { uri: moviePreLink + this.props.data.get("poster_path") } }
+            source={ { uri: moviePreLink + this.props.data.poster_path } }
             />
         </View>
         <View style={ styles.infoContainer }>
           <View style={ styles.titleBar }>
-            <Text style={ styles.title }>{ this.props.data.get("title") }</Text>
-            <Text style={ styles.year }> { moment(this.props.data.get("release_date")).format("YYYY") }</Text>
+            <Text style={ styles.title }>{ this.props.data.title }</Text>
+            <Text style={ styles.year }> { this.props.data.release_year }</Text>
           </View>
           <View style={ styles.reviewBar }>
             <View style={ styles.review }>
               {stars}
             </View>
           </View>
-          <Text numberOfLines={ 3 } style={ styles.description }>{ this.props.data.get("overview") }</Text>
+          <Text numberOfLines={ 3 } style={ styles.description }>{ this.props.data.overvie }</Text>
         </View>
       </TouchableOpacity>
     );
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
 
 const select = store => {
   return {
-    movies: store.movie.get("popularMovies")
+    movies: store.movie.popularMovies
   };
 };
 

@@ -1,4 +1,5 @@
 "use strict";
+import moment from "moment";
 import { MOVIEDB_API_URL, MOVIEDB_API_KEY, API_URL } from "../config/config";
 
 //
@@ -24,6 +25,7 @@ function searchMovies(query) {
           .then(response => response.json())
           .then(responseJSON => {
             if(responseJSON !== null) {
+              responseJSON.release_year = moment(responseJSON.release_date).format('YYYY');
               return responseJSON;
             } else {
               return [];
